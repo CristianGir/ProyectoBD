@@ -1,0 +1,196 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-color: #0f1013;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 8px 8px 5px 0px #cec7c7bf;
+    width: 80%;
+    background-color: #ffffff;
+    border-radius: 30px;
+}
+
+.table_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px 0;
+}
+
+button {
+    outline: none;
+    border: none;
+    background-color: #008B8B;
+    color: #ffffff;
+    padding: 10px 30px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #00CED1;
+    color: #ffffff;
+}
+
+button a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.input_search {
+    position: relative;
+}
+
+.input_search > input {
+    border-radius: 30px;
+    width: 400px;
+    outline: none;
+    padding: 10px 50px 10px 20px;
+    border: 4px solid #c9c9c9;
+    box-sizing: border-box;
+}
+
+.input_search > button {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+#search {
+    position: absolute;
+    top: 50%;
+    right: 20px; /* Ajusta el valor según sea necesario */
+    transform: translate(-50%, -50%);
+    z-index: 2; /* Agrega esta propiedad */
+}
+
+
+table {
+    border-spacing: 0;
+    margin-top: 1rem;
+}
+
+thead {
+    background-color: #fff7b3;
+}
+
+th {
+    padding: 10px;
+}
+
+tbody tr td {
+    padding: 10px;
+    text-align: center;
+}
+
+#icons {
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 10px;
+    color: #ffffff;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+.logo {
+    width: 5%;
+    padding-left: 0px;
+    padding-right: 10px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+}
+
+.spinner {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    border-top-color: #3498db;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    0%
+ {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+.input_search {
+    display: flex;
+    align-items: center;
+}
+
+.search-wrapper {
+    position: relative;
+}
+
+.search-wrapper input {
+    border-radius: 30px;
+    width: 400px;
+    outline: none;
+    padding: 10px 50px 10px 20px;
+    border: 4px solid #c9c9c9;
+    box-sizing: border-box;
+}
+
+.search-button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    outline: none;
+    border: none;
+    background-color: #008B8B;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    transition: none; /* Elimina la transición al pasar el cursor */
+}
+
+
+.search-button i {
+    color: #000000;
+    font-size: 24px;
+}
+
+
+
+

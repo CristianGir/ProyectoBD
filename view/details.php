@@ -10,12 +10,18 @@
         $result = mysqli_query($conexion, $detalles);
     }
 
-    if(isset($_POST["eliminar"])) {
-        $id_pro = $_POST["id_pro"];
+    if (isset($_POST["eliminar"])) {
+        $id_pro = $_POST["id"];
         $nro_fac = $_POST["nro_fac"];
-        $query = "DELETE FROM detalles WHERE ide_pro = '$id_pro' AND nro_fac = '$nro_fac'";
-        mysqli_query($conexion, $query);
-    }
+        $sqlFacturar = "DELETE FROM facturar WHERE nro_fac = ?";
+        $stmtFacturar = $conexion->prepare($sqlFacturar);
+        $stmtFacturar->bind_param("i", $nro_fac);
+        $stmtFacturar->execute();
+        $sqlDetails = "DELETE FROM detalles WHERE ide_pro = ? AND nro_fac = ?";
+        $stmtDetails = $conexion->prepare($sqlDetails);
+        $stmtDetails->bind_param("ii", $id_pro, $nro_fac);
+        $stmtDetails->execute();
+    }    
 ?>
 
 <!DOCTYPE html>

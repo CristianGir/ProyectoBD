@@ -114,8 +114,6 @@
             // Verificar si hay resultados
             if(mysqli_num_rows($result) > 0) {
                 // Recorrer los resultados y mostrarlos en una tabla HTML
-                echo "<table>";
-                echo "<tr><th>NIT</th><th>Nombre</th><th>Teléfono</th><th>Producto</th></tr>";
                 while($row = mysqli_fetch_assoc($result)) {
                     echo "<tr>";
                     echo "<td>".$row["nit_pro"]."</td>";

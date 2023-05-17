@@ -61,12 +61,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($cantidad > $productos[$producto]['stock']) {
         echo "La cantidad seleccionada no está disponible en el stock.";
     } else {
+        $newStock = $productos[$producto]['stock'] - $cantidad;
+        $update = "UPDATE productos SET can_pro = $newStock WHERE ide_pro = '$producto'";
+        if ($conexion 
+        ->query($update) === TRUE) {}
         // Insertar la factura en la tabla "facturar"
         $sql = "INSERT INTO facturar (nro_fac, fec_fac, ide_cli, ide_ven, val_tot_fac) VALUES ('$nro_fac', '$fecha_actual', '$cliente', '$vendedor', 0)";
         if ($conexion
     ->query($sql) === TRUE) {
             // Crear el detalle de la factura en la tabla "detalles"
-            $sql = "INSERT INTO detalles (nro_fac, ide_pro, cant_det, val_ind) VALUES ('$nro_fac', '$producto', '$cantidad', '{$productos[$producto]['precio']}')";
+            $total = $cantidad * $productos[$producto]['precio'];
+            $sql = "INSERT INTO detalles (nro_fac, ide_pro, cant_det, val_ind, val_tot) VALUES ('$nro_fac', '$producto', '$cantidad', '{$productos[$producto]["precio"]}', '$total')";
             if ($conexion
         ->query($sql) === TRUE) {
                 // Calcular el valor total de la factura

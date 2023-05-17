@@ -11,7 +11,6 @@ if ($result->num_rows > 0) {
 } else {
     $nro_fac = 1;
 }
-
 // Obtener la fecha actual
 $fecha_actual = date("Y-m-d");
 
@@ -21,20 +20,20 @@ $result = $conexion->query($sql);
 $clientes = array();
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
+        $ide_cli = $row['ide_cli'];
         $clientes[$row['ide_cli']] = $row['nom_cli'];
     }
 }
-
 // Obtener los nombres y las ide de los vendedores
 $sql = "SELECT ide_ven, nom_ven FROM vendedor";
 $result = $conexion->query($sql);
 $vendedores = array();
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
+        $ide_ven = $row['ide_ven'];
         $vendedores[$row['ide_ven']] = $row['nom_ven'];
     }
 }
-
 // Obtener los nombres, las ide y los precios de los productos
 $sql = "SELECT ide_pro, nom_pro, val_ven_pro, can_pro FROM productos";
 $result = $conexion->query($sql);
@@ -48,7 +47,6 @@ if ($result->num_rows > 0) {
         );
     }
 }
-
 // Verificar si se ha enviado el formulario
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Obtener los datos del formulario
@@ -56,7 +54,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $vendedor = $_POST['vendedor'];
     $producto = $_POST['producto'];
     $cantidad = $_POST['cantidad'];
-
+    $nom_pro = $productos[$producto]['nombre'];
+    $val_ven_pro = $productos[$producto]['precio'];
     // Verificar si el producto seleccionado está disponible en stock
     if ($cantidad > $productos[$producto]['stock']) {
         echo "La cantidad seleccionada no está disponible en el stock.";
@@ -91,6 +90,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "Error al crear la factura: " . $conexion
         ->error;
         }
+        // Obtener los datos de la factura
+        $nro_fac = $nro_fac; // Obtener el número de factura desde donde sea necesario
+        $ide_cli = $ide_cli; // Obtener el ID del cliente desde donde sea necesario
+        $ide_ven = $ide_ven; // Obtener el ID del vendedor desde donde sea necesario
+        $nom_pro = $nom_pro; // Obtener el nombre del producto desde donde sea necesario
+        $val_ven_pro = $val_ven_pro; // Obtener el valor de venta del producto desde donde sea necesario
+        $cantidad = $cantidad; // Obtener la cantidad desde donde sea necesario
+        $val_tot_fac = $total; // Obtener el valor total de la factura desde donde sea necesario
+
+        // Construir la URL con los parámetros de la factura
+        $url = "showTicket.php?nro_fac=$nro_fac&ide_cli=$ide_cli&ide_ven=$ide_ven&nom_pro=$nom_pro&val_ven_pro=$val_ven_pro&cantidad=$cantidad&val_tot_fac=$val_tot_fac&fec_fac=$fecha_actual";
+
+        // Redirigir al usuario a la página showTicket.php
+        header("Location: $url");
+        exit(); // Asegurarse de que no se ejecuten más líneas de código después de la redirección
     }
 }    
 $conexion->close();
